@@ -21,27 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 selectedInterests = selectedInterests.filter(i => i !== interest);
             }
-
-            // For now, let's just log the selected interests
-            console.log('Selected Interests:', selectedInterests);
-
-            // In the next step, we will fetch and display news based on these interests
             displayNews(); 
         });
     });
 
-    // 3. Display News (Placeholder for now)
+    // 3. Display News
     function displayNews() {
         const feedContainer = document.querySelector('.feed-container');
         feedContainer.innerHTML = ''; // Clear existing news
 
         if (selectedInterests.length === 0) {
-            feedContainer.innerHTML = '<p>Select an interest to see your personalized news feed.</p>';
+            // Create a styled placeholder message
+            const placeholder = document.createElement('div');
+            placeholder.classList.add('placeholder-message');
+            placeholder.textContent = 'Select an interest to see your personalized news feed.';
+            feedContainer.appendChild(placeholder);
             return;
         }
 
         // --- Placeholder Content ---
-        // In a real app, you would fetch this data from a news API
         const dummyArticles = {
             Technology: [
                 { title: 'New AI Model Released', description: 'A breakthrough in AI has been announced, promising to change the tech landscape.', url: '#', imageUrl: 'https://images.unsplash.com/photo-1620712943543-285820f4c0a4?q=80&w=1632&auto=format&fit=crop' },
@@ -65,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Create a News Article Web Component (as a function for now)
+    // 4. Create a News Article element
     function createNewsArticle(article) {
         const articleDiv = document.createElement('div');
         articleDiv.classList.add('news-article');
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const link = document.createElement('a');
         link.textContent = 'Read More';
         link.href = article.url;
-        link.target = '_blank'; // Open in new tab
+        link.target = '_blank';
 
         contentDiv.appendChild(title);
         contentDiv.appendChild(description);
@@ -100,5 +98,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial placeholder message
     displayNews(); 
-
 });
